@@ -1,6 +1,6 @@
 ---
 name: choose-effort
-description: Recommends reasoning effort and an execution mode before heavy work in Claude Code or Codex, with setup instructions and a usage checkpoint. Use when the user asks which effort level to use, what the orchestrator level is, when to use Ultra, how to use less going forward, or how to set up a long run with subagents, goal mode, workflows, or agent teams. Not for past usage drains, plan limits, prices, or model support. For Claude Code, use diagnose-usage or product-self-knowledge. For Codex, use usage reporting or official product docs.
+description: Recommends reasoning effort and an execution mode before heavy work in Claude Code or Codex, with setup instructions and a usage checkpoint. Use when the user asks which effort level to use, what the orchestrator level is, when to use Ultra, how to use less going forward, or how to set up a long run with subagents, goal mode, workflows, or agent teams. Not for past usage drains, persistent model tiers, plan limits, prices, or model support. Use diagnose-usage for past drains, setup-claude-advisor for persistent model tiers, and official product docs for plan limits, prices, or model support.
 version: 1.1.0
 ---
 
@@ -37,6 +37,11 @@ Recommend a reasoning level, a way to run the task, and a first checkpoint. The 
 - Use `/effort <level>`, or `claude --effort <level>` for one launched session. Check the confirmation text because `/effort` may save the new default. Use `/effort auto` to clear it. If unsure which levels are supported, ask the user to check the `/effort` slider.
 - Subagents inherit the session's effort by default. For mechanical fan-out, recommend a lower session level and a first checkpoint. Call out any planned subagents, Agent Teams, workflows, `/goal`, or long SDK run.
 - Check `/usage` after the first stage and at the end. Route a past usage drain to `diagnose-usage`. Route plan allowances, prices, and model support to `product-self-knowledge`.
+
+## Hand off
+
+- Send a completed run's usage question to `diagnose-usage`.
+- Send a request for persistent advisor or subagent model tiers to `setup-claude-advisor`.
 
 ## Answer shape
 
