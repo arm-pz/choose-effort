@@ -1,6 +1,6 @@
 ---
 name: choose-effort
-description: Recommends reasoning effort and an execution mode before heavy work in Claude Code or Codex, with setup instructions and a usage checkpoint. Use when the user asks which effort level to use, what the orchestrator level is, when to use Ultra, how to use less going forward, or how to set up a long run with subagents, goal mode, workflows, or agent teams. Not for past usage drains, persistent model tiers, plan limits, prices, or model support. Use diagnose-usage for past drains, setup-claude-advisor for persistent model tiers, and official product docs for plan limits, prices, or model support.
+description: Recommends reasoning effort and an execution mode before heavy work in Claude Code or Codex, with setup instructions and a usage checkpoint. Use when the user asks which effort level to use, what the orchestrator level is, when to use Ultra, how to use less going forward, or how to set up a long run with subagents, goal mode, workflows, or agent teams. Not for past usage drains, persistent model tiers, plan limits, prices, or model support. Use diagnose-usage for past drains, setup-claude-advisor for persistent model tiers, and product-self-knowledge in Claude Code or official Codex docs for plan limits, prices, or model support.
 version: 1.1.0
 ---
 
@@ -10,16 +10,19 @@ Recommend a reasoning level, a way to run the task, and a first checkpoint. The 
 
 ## Select the host
 
-Use the active runtime's host and client information to select Codex or Claude Code automatically. For diagnosis, honor any explicitly identified source client for the affected run. For setup or effort advice, honor a different target only if the user explicitly names it. A model name, a CLI installed on disk, or config files in the repository alone do not identify the active host.
+Use the active client to choose Codex or Claude Code controls. If the user explicitly asks about a different client, answer for that client. A model name or a config file alone does not establish which client is active.
 
 Follow the matching guidance below. Continue with a host-neutral effort level, execution plan, and checkpoint if the host is unknown. Ask only if the user needs an exact setting or command.
 
-## Workflow
+## Ground rules
 
-1. Ask up to three short questions about task scope, the cost of a wrong answer, and usage constraints. Skip anything the user already told you. If they only ask for a definition, such as which Codex setting orchestrates subagents, answer directly.
-2. Choose a starting level from the table. Use the labels available in the user's model and client. If unsure, point to the picker or check current product docs.
-3. Choose an execution mode based on whether the work can be split. Use the host-specific guidance below.
-4. Give the recommendation, how to set it, and when to check progress and usage. Only report a setting change after the user or client confirms it.
+- **Ask before recommending when context is missing.** Ask up to three short questions about scope, the cost of a wrong answer, and usage constraints. Skip anything already answered. For a definition, answer directly.
+- **The user changes settings.** Show the control or command and wait if the user wants the work to pause until it is applied. Never say a setting changed without confirmation from the user or client.
+
+## Workflow
+1. Choose a starting level from the table. Use the labels available in the user's model and client. If unsure, point to the picker or check current product docs.
+2. Choose an execution mode based on whether the work can be split. Use the host-specific guidance below.
+3. Give the recommendation, how to set it, and when to check progress and usage.
 
 | Task | Start at |
 |---|---|
@@ -33,7 +36,7 @@ Follow the matching guidance below. Continue with a host-neutral effort level, e
 
 - **Ultra mode** is the Codex option for proactive subagent orchestration where the client and model offer it. Recommend it for larger tasks with independent work, such as investigating separate modules or reviewing different risks. Use a regular effort level for tightly coupled work that benefits from shared context. High, Extra high, and Max are reasoning levels.
 - For a specific split, the user can explicitly request subagents where supported. Give each agent a distinct question or file scope. Use goal mode (`/goal` where available) for persistence toward a clear outcome. A goal can use one agent or several.
-- In the app, use the model and reasoning controls below the composer or `/reasoning` where available. In the CLI, use `/model` to see supported options. For example, use `/model --reasoning=high` if the active model supports it. Recommend Ultra through the available mode picker when it appears.
+- In the app, use the model and reasoning controls below the composer or `/reasoning` where available. In the CLI, use `/model` to see supported options. For example, use `/model --reasoning=high` if the active model supports it. In the CLI, select a model in `/model`, then check **More reasoning…** for Ultra where offered. In the app, check the model and reasoning picker.
 - Check progress after the first investigation or work split. Use `/status` for session information and `/usage` for usage where available.
 - References: [Models and reasoning controls](https://learn.chatgpt.com/docs/models?surface=app#choose-a-model), [subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents), [app slash commands](https://learn.chatgpt.com/docs/app/slash-commands), and [CLI model picker](https://learn.chatgpt.com/docs/developer-commands?surface=cli#set-the-active-model-with-model).
 
@@ -47,6 +50,7 @@ Follow the matching guidance below. Continue with a host-neutral effort level, e
 
 - Send a completed run's usage question to `diagnose-usage`.
 - Send a request for persistent advisor or subagent model tiers to `setup-claude-advisor`.
+- For plan allowances, prices, or model support, use `product-self-knowledge` in Claude Code if available, or current official docs for the affected client.
 
 ## Answer shape
 
