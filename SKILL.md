@@ -8,13 +8,18 @@ version: 1.1.0
 
 Recommend a reasoning level, a way to run the task, and a first checkpoint. The user applies any setting changes.
 
+## Select the host
+
+Use the active runtime's host and client information to select Codex or Claude Code automatically. For diagnosis, honor any explicitly identified source client for the affected run. For setup or effort advice, honor a different target only if the user explicitly names it. A model name, a CLI installed on disk, or config files in the repository alone do not identify the active host.
+
+Follow the matching guidance below. Continue with a host-neutral effort level, execution plan, and checkpoint if the host is unknown. Ask only if the user needs an exact setting or command.
+
 ## Workflow
 
-1. Identify the host and client from the session. If unclear, ask whether the user is in Claude Code, the Codex app, or the Codex CLI.
-2. Ask up to three short questions about task scope, the cost of a wrong answer, and usage constraints. Skip anything the user already told you. If they only ask for a definition, such as which Codex setting orchestrates subagents, answer directly.
-3. Choose a starting level from the table. Use the labels available in the user's model and client. If unsure, point to the picker or check current product docs.
-4. Choose an execution mode based on whether the work can be split. Use the host-specific guidance below.
-5. Give the recommendation, how to set it, and when to check progress and usage. Only report a setting change after the user or client confirms it.
+1. Ask up to three short questions about task scope, the cost of a wrong answer, and usage constraints. Skip anything the user already told you. If they only ask for a definition, such as which Codex setting orchestrates subagents, answer directly.
+2. Choose a starting level from the table. Use the labels available in the user's model and client. If unsure, point to the picker or check current product docs.
+3. Choose an execution mode based on whether the work can be split. Use the host-specific guidance below.
+4. Give the recommendation, how to set it, and when to check progress and usage. Only report a setting change after the user or client confirms it.
 
 | Task | Start at |
 |---|---|

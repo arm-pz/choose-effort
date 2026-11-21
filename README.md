@@ -1,6 +1,6 @@
 # choose-effort
 
-An agent skill for Claude Code and Codex. Before a heavy run, it recommends how much reasoning
+An agent skill that automatically uses the active Claude Code or Codex client. Before a heavy run, it recommends how much reasoning
 to use, whether the work should be split across agents, which control to use, and when to check
 progress and usage. You apply the setting.
 

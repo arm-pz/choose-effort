@@ -21,5 +21,6 @@ The expected triggers below were reviewed against the skill descriptions. A manu
 | C15 | Which reasoning levels does my Codex model support? | no load, use official docs or the picker | near-miss | pass | Model capabilities without a task decision |
 | C16 | Why did my last Codex session use up my quota? | no load, use diagnose-usage | boundary | pass | Completed run, outside prospective effort selection |
 | C17 | Configure a permanent Codex advisor and lighter readers for this repo | no load, use setup-claude-advisor | boundary | pass | Persistent model roles without a per-task decision |
+| C18 | What effort should I use for this refactor? (active host: Codex) | load | runtime | pass | Uses Codex controls without asking for a host or model |
 
 Boundary pairs: C1 against C6 (before versus after the work); C11 against D12 in `diagnose-usage` (the same prompt: `choose-effort` loads and `diagnose-usage` does not); C2 against C7 (which level for this task versus which levels exist). In Codex, C12 versus C15 distinguishes the orchestration setting from model support. C14 versus C16 distinguishes setup from past usage.
