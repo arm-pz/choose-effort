@@ -1,13 +1,14 @@
 # choose-effort
 
-An AI agent skill (a `SKILL.md` for Claude Code) that asks how heavy a task is before you start,
-then recommends an effort level, whether to fan out to subagents, `/goal`, workflows or agent
-teams, the `/effort` command to set it, and when to check `/usage`. It recommends; you set the
-level. The starting table is a rough default, because Anthropic's guidance differs per model.
+An agent skill for Claude Code and Codex. Before a heavy run, it recommends how much reasoning
+to use, whether the work should be split across agents, which control to use, and when to check
+progress and usage. You apply the setting.
 
-Siblings: [diagnose-usage](https://github.com/arm-pz/diagnose-usage) for working out why a
-session already drained your limit. For plan limits and which models support which levels, see
-Anthropic's docs.
+In Codex, **Ultra mode** can proactively bring in subagents when the client and model offer it.
+Use it for work with independent parts. For a tightly coupled task, choose a reasoning level using
+the app's reasoning control or the CLI's `/model` picker. In Claude Code, use `/effort`.
+
+For a past Claude Code usage drain, use [diagnose-usage](https://github.com/arm-pz/diagnose-usage).
 
 ## Install
 
@@ -15,19 +16,20 @@ Anthropic's docs.
 npx skills add arm-pz/choose-effort --skill choose-effort
 ```
 
-Or copy the repo files into `~/.claude/skills/choose-effort/` and start a new session.
+Or copy the repo files into `~/.claude/skills/choose-effort/` for Claude Code or
+`~/.agents/skills/choose-effort/` for Codex.
 
 ## Ask it things like
 
-- "What effort level should I use to refactor the auth module?"
-- "Set me up to run this overnight."
-- "Plan an agent team run to rewrite the test suite."
+- "Which Codex level is the orchestrator?"
+- "Should I use Ultra or High to debug this issue in Codex?"
+- "What effort should I use in Claude Code to refactor the auth module?"
+- "Set me up to run this overnight without burning through my limit."
 
-## Status
+## Validation
 
-Structure checks done by hand; trigger cases in `references/trigger-cases.md` are hand-read
-against the skill descriptions and **not** run in a live session. `check_skill.py`: OK, 0 fail
-0 warn.
+`references/trigger-cases.md` records a manual review of the expected triggers and boundaries.
+It does not measure live skill activation.
 
 ## License
 
